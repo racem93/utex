@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/UTEX.iml" filepath="$PROJECT_DIR$/.idea/UTEX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../UTEX/.idea/UTEX.iml" filepath="$PROJECT_DIR$/../UTEX/.idea/UTEX.iml" />
     </modules>
   </component>
 </project>

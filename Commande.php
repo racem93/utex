@@ -34,6 +34,7 @@ include("header.php");
                         <tr>
                             <th>Ref</th>
                             <th>Qte</th>
+                            <th>Staut</th>
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -44,6 +45,23 @@ include("header.php");
 
                         include_once("config/MyPDO.class.php");
                         $connect = new MyPDO();
+                        //function cherche les produits similaires
+                        function equivalence($ref,$qte){
+                            $lien=array();
+                            include_once("config/MyPDO.class.php");
+                            $connect = new MyPDO();
+                            $req4 = "SELECT refprod2 FROM equivalance ,produits  WHERE `refprod1`='$ref' AND `refprod2`=`refProduit` AND `qte`='$qte'    ";
+                            $oPDOStatement4=$connect->query($req4); // Le résultat est un objet de la classe PDOStatement
+                            $oPDOStatement4->setFetchMode(PDO::FETCH_OBJ);
+                            while ($row4=$oPDOStatement4->fetch())
+                            {
+                                $refprod2=$row4->refprod2;
+                                array_push($lien,$refprod2);
+
+                            }
+
+                        }
+                        //Fin function
 
                         // on extrait les id du caddie
                         $id_liste = implode(',', array_keys($_SESSION['qte']));
@@ -80,11 +98,32 @@ include("header.php");
                         $refProduit = $data['refProduit'];
                         $qte = $_SESSION['qte'][$idProduit];
                         $etat=$_SESSION['etat'][$idProduit];
-                        if ($_SESSION['etat'][$idProduit] == 1) {
+
+
+                        if ($etat != 2) {
                         ?>
                         <tr>
                             <td><?php echo $refProduit; ?></td>
                             <td><?php echo $qte; ?></td>
+                            <td>
+                                <?php
+                                //test quand la quantité n'est pas disponible
+                                $arrivage=0;
+                                $lien=array();
+                                if ($etat == 0) {
+                                    $arrivage=$data['arrivage'];
+                                    if ($arrivage>=$qte){
+                                        echo "Bientôt disponible";
+                                    }
+                                    else {
+                                        $lien=equivalence($refProduit,$qte);
+                                        var_dump($lien);
+                                    }
+
+                                }
+                                //fin test qnt non disponible
+                                ?>
+                            </td>
                             <td>
                                 <ol class="breadcrumb breadcrumb-col-red">
                                     <li>
