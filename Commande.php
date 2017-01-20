@@ -57,6 +57,7 @@ include("header.php");
                             {
                                 $refprod2=$row4->refprod2;
                                 array_push($lien,$refprod2);
+                                return $lien;
 
                             }
 
@@ -110,6 +111,7 @@ include("header.php");
                                 //test quand la quantité n'est pas disponible
                                 $arrivage=0;
                                 $lien=array();
+                                if ($etat == 1)  echo "Disponible";
                                 if ($etat == 0) {
                                     $arrivage=$data['arrivage'];
                                     if ($arrivage>=$qte){
