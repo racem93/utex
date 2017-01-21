@@ -38,6 +38,7 @@
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/panier.css" rel="stylesheet">
+      <link rel="stylesheet" href="css/stylepanier.css">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="css/theme-red.css" rel="stylesheet" />
