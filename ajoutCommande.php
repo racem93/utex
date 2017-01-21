@@ -58,7 +58,7 @@ if (isset($_POST["commande"])) {
     {
         $qteProduit=$row->qte;
     }
-    $req="SELECT `qte` FROM `lignecommande`,`commande` WHERE `idProduit`='$idProduit' AND `lignecommande`.`idCommande`=`commande`.`idCommande` AND `etat`=1 AND `traite`=0 ";
+    $req="SELECT `qte` FROM `lignecommande` WHERE `idProduit`='$idProduit' AND `etat`=1 ";
     $oPDOStatement=$connect->query($req);
     $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
     $commandeTotale=0;
@@ -107,7 +107,7 @@ include("header.php");
             ?>
             <!-- Panier -->
 
-
+            
 
             <!--END Panier -->
             <div class="block-header">
@@ -117,10 +117,13 @@ include("header.php");
 
                 <h2>Commande</h2>
                 <div class="navbar-right">
-                <button type="button" class="btn btn-default btn-circle-lg waves-effect waves-circle waves-float " data-trigger="focus" data-container="body" data-toggle="popover"
-                        data-placement="bottom" title="Popover Title" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-                    <i class="material-icons">extension</i>
-                </button>
+
+			  
+			  	<a href="Commande.php" class="buybtn">
+						<span class="buybtn-text">Produits Sélectionnés(0)</span> 
+						<span class="buybtn-hidden-text">Voir commande</span>
+						<span class="buybtn-image"><span></span></span>
+					</a>		
                     </div>
             </div>
             <!-- Horizontal Layout -->
