@@ -133,7 +133,12 @@ include("header.php");
                                     }
                                     else {
                                         $lien=equivalence($refProduit,$qte);
-                                        var_dump($lien);
+                                        echo "Pas disponible<br>";
+                                        echo "Suggestion:<br>";
+                                        foreach($lien as $suggestion){
+                                            echo "<a href='ajax/ajoutSuggestion.php?ref=".$suggestion."&qte=".$qte."' >".$suggestion."</a>";
+                                            echo "<br>";
+                                        }
                                     }
 
                                 }
@@ -166,17 +171,19 @@ include("header.php");
                         }
                         ?>
                     </table>
-                    <form method="post" action="Commande.php">
-                        <div class="row">
-                            <div class="col-xs-8 p-t-5">
-                               <h5> <a href="ajoutCommande.php"><<< Continuer mes achats</a></h5>
-                            </div>
-                            <div class="col-xs-4">
-                                <button class="btn btn-primary m-t--15 waves-effect" type="submit" name="submit">Commander</button>
-                            </div>
-                        </div>
-                    </form>
+
                 </div>
+                <form method="post" action="Commande.php">
+                    <div class="row">
+                        <div class="col-xs-8 p-t-5">
+                            <h5> <a href="ajoutCommande.php"><<< Continuer mes achats</a></h5>
+                        </div>
+                        <div class="col-xs-4">
+                            <button class="btn btn-primary m-t--15 waves-effect" type="submit" name="submit">Commander</button>
+                        </div>
+                    </div>
+                </form>
+                <br>
 
             </div>
         </div>
