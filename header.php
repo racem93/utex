@@ -26,6 +26,9 @@
     <!-- Bootstrap Material Datetime Picker Css -->
     <link href="plugins/bootstrap-material-datetimepicker.css" rel="stylesheet" />
 
+    <!-- JQuery DataTable Css -->
+    <link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
     <!-- Wait Me Css -->
     <link href="plugins/waitMe.css" rel="stylesheet" />
 

@@ -36,9 +36,16 @@
 <!-- Bootstrap Material Datetime Picker Plugin Js -->
 <script src="plugins/bootstrap-material-datetimepicker.js"></script>
 
+<!-- Jquery DataTable Plugin Js -->
+<script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+<script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+
+
+
+
 <!-- Custom Js -->
 <script src="js/admin.js"></script>
-<script src="js/tooltips-popovers.js"></script>
+<script src="js/jquery-datatable.js"></script>
 <script src="js/basic-form-elements.js"></script>
 
 

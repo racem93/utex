@@ -155,6 +155,7 @@ include("header.php");
                                     </a>
                                     </li>
                                     </ol>
+                            </td>
                         </tr>
                         </tbody>
                         <?php
