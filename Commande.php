@@ -46,20 +46,34 @@ include("header.php");
                         include_once("config/MyPDO.class.php");
                         $connect = new MyPDO();
                         //function cherche les produits similaires
-                        function equivalence($ref,$qte){
+                        function equivalence($ref,$qteCommande){
                             $lien=array();
                             include_once("config/MyPDO.class.php");
                             $connect = new MyPDO();
-                            $req4 = "SELECT refprod2 FROM equivalance ,produits  WHERE `refprod1`='$ref' AND `refprod2`=`refProduit` AND `qte`='$qte'    ";
+                            $req4 = "SELECT `produits`.`id` AS idProduit,refprod2,qte FROM equivalance ,produits  WHERE `refprod1`='$ref' AND `refprod2`=`refProduit` AND `qte`>='$qteCommande'    ";
                             $oPDOStatement4=$connect->query($req4); // Le résultat est un objet de la classe PDOStatement
                             $oPDOStatement4->setFetchMode(PDO::FETCH_OBJ);
                             while ($row4=$oPDOStatement4->fetch())
                             {
+                                $idProduit=$row4->idProduit;
                                 $refprod2=$row4->refprod2;
-                                array_push($lien,$refprod2);
-                                return $lien;
+                                $qteProduit=$row4->qte;
+                                //récuppére les qnts qui sont commandé et ne sont pas encoré traiter
+                                $req="SELECT `qte` FROM `lignecommande`,`commande` WHERE `idProduit`='$idProduit' AND `lignecommande`.`idCommande`=`commande`.`idCommande` AND `etat`=1 AND `traite`=0 ";
+                                $oPDOStatement=$connect->query($req);
+                                $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
+                                $commandeTotale=0;
+                                while ($row = $oPDOStatement->fetch())
+                                {
+                                    $commandeTotale= $commandeTotale+($row->qte);
+                                }
+                                $qteDisponible=$qteProduit-$commandeTotale;
+                                if($qteCommande<=$qteDisponible) {
+                                                                array_push($lien,$refprod2);
+                                }
 
                             }
+                            return $lien;
 
                         }
                         //Fin function

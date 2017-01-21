@@ -58,7 +58,7 @@ if (isset($_POST["commande"])) {
     {
         $qteProduit=$row->qte;
     }
-    $req="SELECT `qte` FROM `lignecommande` WHERE `idProduit`='$idProduit' AND `etat`=1 ";
+    $req="SELECT `qte` FROM `lignecommande`,`commande` WHERE `idProduit`='$idProduit' AND `lignecommande`.`idCommande`=`commande`.`idCommande` AND `etat`=1 AND `traite`=0 ";
     $oPDOStatement=$connect->query($req);
     $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
     $commandeTotale=0;
