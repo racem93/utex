@@ -60,7 +60,9 @@ include("header.php");
                                         <td>CMD<?php echo $refCommade; ?></td>
                                         <td><?php echo $dateCommande; ?></td>
                                         <td>
+                                            <a href="detailsClientCommande.php?commande=<?php echo $refCommade; ?>" id="iframe">
                                             <button type="button" class="btn btn-info waves-effect">détails</button>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php
@@ -79,6 +81,8 @@ include("header.php");
             <!-- #END# Basic Table -->
         </div>
     </section>
+
+    <!--POP-PUP begin-------------------------------------------------------------------------------------------------->
 
 
 <?php

@@ -61,11 +61,20 @@
         }
     </script>
 
+    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.5" media="screen" />
+    <style type="text/css">
+        .fancybox-custom .fancybox-skin {
+            box-shadow: 0 0 50px #222;
+        }
+
+
+    </style>
+
 
 </head>
 
 <body class="theme-red">
-<!-- Page Loader ->
+<!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
         <div class="preloader">
