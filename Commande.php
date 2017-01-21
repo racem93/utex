@@ -106,9 +106,11 @@ include("header.php");
                             }
                                 //Fin insertion de commande
 
-
+				$comptpanier=0;
                         while ($data = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu de résultat PDO
                         {
+						$comptpanier=$comptpanier+1;
+					   $_SESSION['comptpanier']=$comptpanier;
                         $idProduit = $data['id'];
                         $refProduit = $data['refProduit'];
                         $qte = $_SESSION['qte'][$idProduit];
@@ -192,6 +194,8 @@ include("header.php");
     if(isset($_POST['submit'])) {
         unset($_SESSION['qte']);
         unset($_SESSION['etat']);
+		unset($_SESSION['comptpanier']);
+
        echo "<SCRIPT LANGUAGE='JavaScript'>
                 self.parent.location.href='ajoutCommande.php?msg=commander';
                 </SCRIPT> ";

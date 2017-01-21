@@ -62,10 +62,14 @@ if (isset($_POST["commande"])) {
     $oPDOStatement=$connect->query($req);
     $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
     $commandeTotale=0;
+	$comptpanier=0;
+
     while ($row = $oPDOStatement->fetch())
     {
         $commandeTotale= $commandeTotale+($row->qte);
-    }
+		    	
+
+	}
     $qteDisponible=$qteProduit-$commandeTotale;
     if($qteCommande>$qteDisponible) {
                                     panier($idProduit,$qteCommande,0);
@@ -120,7 +124,15 @@ include("header.php");
 
 			  
 			  	<a href="Commande.php" class="buybtn">
-						<span class="buybtn-text">Produits Sélectionnés(0)</span> 
+						<span class="buybtn-text">Produits Sélectionnés(<?php 
+						if (isset($_SESSION['comptpanier'])){
+						echo $_SESSION['comptpanier']; 
+						}else{
+						echo "0";
+						}
+						
+						?>)
+						</span> 
 						<span class="buybtn-hidden-text">Voir commande</span>
 						<span class="buybtn-image"><span></span></span>
 					</a>		
