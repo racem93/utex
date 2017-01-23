@@ -72,10 +72,17 @@ if (isset($_POST["commande"])) {
 	}
     $qteDisponible=$qteProduit-$commandeTotale;
     if($qteCommande>$qteDisponible) {
+                                    $req = "INSERT INTO histcommande ( utilisateur,idProduit,qte,etat)
+                                            VALUES ("."'".$utilisateur."'".","."'".$idProduit."'".","."'".$qteCommande."'".",0)";
+                                    $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
                                     panier($idProduit,$qteCommande,0);
 
-                                     }
+    }
     else {
+        panier($idProduit,$qteCommande,0);
+        $req = "INSERT INTO histcommande ( utilisateur,idProduit,qte,etat)
+                VALUES ("."'".$utilisateur."'".","."'".$idProduit."'".","."'".$qteCommande."'".",1)";
+        $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
         panier($idProduit,$qteCommande,1);
     }
 }
