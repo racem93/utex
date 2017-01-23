@@ -29,7 +29,7 @@ include("header.php");
 
                         </div>
                         <div class="body table-responsive">
-                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table class="table table-bordered table-striped table-hover js-basic-example2 dataTable">
                                 <thead>
                                 <tr>
                                     <th>Ref Commande</th>
@@ -42,7 +42,7 @@ include("header.php");
                                 <?php
                                 include_once("config/MyPDO.class.php");
                                 $connect = new MyPDO();
-                                $req="SELECT * FROM `commande` ORDER BY `dateCommande` DESC";
+                                $req="SELECT * FROM `commande` ORDER BY `dateCommande` DESC ";
                                 $oPDOStatement=$connect->query($req);
                                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
                                 while ($row = $oPDOStatement->fetch()) {
@@ -87,3 +87,14 @@ include("header.php");
 
 <?php
 include("footer.php");
+?>
+<script type="text/javascript">
+    $(function () {
+        $('.js-basic-example2').DataTable({
+            "bSort":   false,
+
+        } );
+        //Exportable table
+
+    });
+</script>
