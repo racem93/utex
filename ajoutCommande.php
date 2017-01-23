@@ -4,10 +4,12 @@ function panier($idProduit,$qte,$etat ){
     if (!isset ($_SESSION['qte']) ){
         $_SESSION['qte']=array();
         $_SESSION['etat']=array();
+        $_SESSION['comptpanier']=0;
     }
 
     $id_article=$idProduit;
     $quantite_article=$qte;
+    $_SESSION['comptpanier']++;
     $_SESSION['qte'][$id_article]=$quantite_article;
     $_SESSION['etat'][$id_article]=$etat;
     if ($etat==0){
@@ -123,7 +125,7 @@ include("header.php");
             <!--END Panier -->
             <div class="block-header">
                 <?php
-                var_dump($_SESSION);
+                //var_dump($_SESSION);
                 ?>
 
                 <h2>Commande</h2>

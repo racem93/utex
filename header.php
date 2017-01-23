@@ -149,10 +149,22 @@
                         <span>Home</span>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="ajoutCommande.php">
                         <i class="material-icons">note_add</i>
                         <span>Ajout commande</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="clientCommande.php">
+                        <i class="material-icons">note_add</i>
+                        <span>Historiques des commandes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="gestionCommande.php">
+                        <i class="material-icons">note_add</i>
+                        <span>Gestion commande</span>
                     </a>
                 </li>
 

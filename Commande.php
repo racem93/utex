@@ -16,6 +16,23 @@ include("header.php");
 
         <div class="block-header">
             <h2>Commande</h2>
+            <div class="navbar-right">
+
+
+                <a href="Commande.php" class="buybtn">
+						<span class="buybtn-text">Produits Sélectionnés(<?php
+                            if (isset($_SESSION['comptpanier'])){
+                                echo $_SESSION['comptpanier'];
+                            }else{
+                                echo "0";
+                            }
+
+                            ?>)
+						</span>
+                    <span class="buybtn-hidden-text">Voir commande</span>
+                    <span class="buybtn-image"><span></span></span>
+                </a>
+            </div>
         </div>
         <!-- Basic Table -->
 
@@ -106,11 +123,9 @@ include("header.php");
                             }
                                 //Fin insertion de commande
 
-				$comptpanier=0;
+
                         while ($data = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu de résultat PDO
                         {
-						$comptpanier=$comptpanier+1;
-					   $_SESSION['comptpanier']=$comptpanier;
                         $idProduit = $data['id'];
                         $refProduit = $data['refProduit'];
                         $qte = $_SESSION['qte'][$idProduit];
