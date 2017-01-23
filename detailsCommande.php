@@ -85,11 +85,14 @@ $traite=$_GET["traite"];
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
                         <?php if ($traite==0){  ?>
+                            <a href="traiteCommande.php?commande=<?php echo $idCommande; ?>">
                     <button type="button" class="btn bg-cyan btn-block btn-lg waves-effect">
                         <i class="material-icons">verified_user</i>
+                        Traite
+                    </button>
+                                </a>
                         <?php }?>
                         <?php if ($traite==1){ echo '<h2><span class="label bg-green">traité</span></h2>';} ?>
-                    </button>
                         </div>
                 </div>
 
@@ -108,7 +111,7 @@ $traite=$_GET["traite"];
                     <?php
                     include_once("config/MyPDO.class.php");
                     $connect = new MyPDO();
-                    $req="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande' AND (`etat`=0 OR `etat`=1) AND `lignecommande`.`idProduit`=`produits`.`id` ";
+                    $req="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande'  AND `lignecommande`.`idProduit`=`produits`.`id` ";
                     $oPDOStatement=$connect->query($req);
                     $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
                     $nbre=0;
