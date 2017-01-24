@@ -9,9 +9,9 @@ function panier($idProduit,$qte,$etat ){
 
     $id_article=$idProduit;
     $quantite_article=$qte;
-    $_SESSION['comptpanier']++;
     $_SESSION['qte'][$id_article]=$quantite_article;
     $_SESSION['etat'][$id_article]=$etat;
+    $_SESSION['comptpanier']=count($_SESSION['qte']);
     if ($etat==0){
                 echo "<SCRIPT LANGUAGE='JavaScript'>
                 self.parent.location.href='ajoutCommande.php?msg=insuffisante';
