@@ -211,10 +211,9 @@ include("header.php");
         unset($_SESSION['qte']);
         unset($_SESSION['etat']);
 		unset($_SESSION['comptpanier']);
-
        echo "<SCRIPT LANGUAGE='JavaScript'>
-                self.parent.location.href='ajoutCommande.php?msg=commander';
-                </SCRIPT> ";
+                self.parent.location.href='confCommande.php';
+             </SCRIPT> ";
     }
 }
     ?>
