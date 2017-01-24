@@ -1,10 +1,14 @@
 ﻿<?php
 //$id=$_GET["id"];
 session_start();
-if (isset ($_SESSION["login"])){
+if (isset ($_SESSION["login"]) && ($_SESSION["profile"]==2)){
     header("location:ajoutCommande.php");
     exit();
+}else if (isset ($_SESSION["login"]) && ($_SESSION["profile"]==1)){
+header("location:home.php");
+    exit();
 }
+
 ?>
 <?php
 if (isset($_POST["connexion"])) {
@@ -31,8 +35,13 @@ if (isset($_POST["connexion"])) {
         $_SESSION["id"]=$id;
 		$_SESSION["profile"]=$profile;
 
-        header("location:ajoutCommande.php");
-
+if (isset ($_SESSION["login"]) && ($_SESSION["profile"]==2)){
+    header("location:ajoutCommande.php");
+    exit();
+}else if (isset ($_SESSION["login"]) && ($_SESSION["profile"]==1)){
+header("location:home.php");
+    exit();
+}
 
     }
 }
