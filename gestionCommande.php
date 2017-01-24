@@ -52,6 +52,7 @@ include("header.php");
                                     $traite =$row->traite;
                                     $dateCommande = date("d-m-Y", strtotime($dateCommandeE));
                                     ?>
+                                    <tr>
                                         <td>CMD<?php echo $refCommande; ?></td>
                                         <td><?php echo $dateCommande; ?></td>
                                         <td>
@@ -63,6 +64,7 @@ include("header.php");
                                                 <button type="button" class="btn btn-info waves-effect">détails</button>
                                             </a>
                                         </td>
+                                    </tr>
                                     <?php
                                 }
                                 ?>
