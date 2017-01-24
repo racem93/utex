@@ -19,6 +19,7 @@ if (isset($_POST["connexion"])) {
     {
         $a++;
         $id=$row->idUtilisateur;
+		$profile=$row->profile;
     }
     if ($a == 0) { echo "<SCRIPT LANGUAGE='JavaScript'>
                     self.parent.location.href='index.php?msg=notfound';
@@ -28,6 +29,8 @@ if (isset($_POST["connexion"])) {
     else {
         $_SESSION["login"]=$login;
         $_SESSION["id"]=$id;
+		$_SESSION["profile"]=$profile;
+
         header("location:ajoutCommande.php");
 
 

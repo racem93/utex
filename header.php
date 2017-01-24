@@ -143,12 +143,22 @@
         <div class="menu">
             <ul class="list">
                 <li class="header">MAIN NAVIGATION</li>
-                <li>
+                 <?php 
+				if (isset($_SESSION["profile"]) && $_SESSION["profile"]==1){
+				?>
+			   <li>
                     <a href="#">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>
                 </li>
+				 <?php 
+				}
+				?>
+				
+				 <?php 
+				if (isset($_SESSION["profile"]) && $_SESSION["profile"]==2){
+				?>
                 <li>
                     <a href="ajoutCommande.php">
                         <i class="material-icons">note_add</i>
@@ -161,13 +171,21 @@
                         <span>Historiques des commandes</span>
                     </a>
                 </li>
-                <li>
+				 <?php 
+					}
+				?>
+                <?php 
+				if (isset($_SESSION["profile"]) && $_SESSION["profile"]==1){
+				?>
+				<li>
                     <a href="gestionCommande.php">
                         <i class="material-icons">note_add</i>
                         <span>Gestion commande</span>
                     </a>
                 </li>
-
+				 <?php 
+				  }
+				?>
             </ul>
         </div>
         <!-- #Menu -->
