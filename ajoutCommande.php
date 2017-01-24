@@ -81,7 +81,6 @@ if (isset($_POST["commande"])) {
 
     }
     else {
-        panier($idProduit,$qteCommande,0);
         $req = "INSERT INTO histcommande ( utilisateur,idProduit,qte,etat)
                 VALUES ("."'".$utilisateur."'".","."'".$idProduit."'".","."'".$qteCommande."'".",1)";
         $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
