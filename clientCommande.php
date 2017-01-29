@@ -43,7 +43,7 @@ include("header.php");
                                 include_once("config/MyPDO.class.php");
                                 $connect = new MyPDO();
                                 $idClient=$_SESSION["id"];
-                                $req="SELECT * FROM `commande` WHERE `utilisateur`='$idClient' ORDER BY `dateCommande` DESC ";
+                                $req="SELECT * FROM `commande`,`lignecommande` WHERE `utilisateur`='$idClient' AND `commande`.`idCommande`=`lignecommande`.`idCommande` AND `etat`=1 ORDER BY `dateCommande` DESC ";
                                 $oPDOStatement=$connect->query($req);
                                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
                                 $nbre=0;
