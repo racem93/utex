@@ -14,12 +14,12 @@ function panier($idProduit,$qte,$etat ){
     $_SESSION['comptpanier']=count($_SESSION['qte']);
     if ($etat==0){
                 echo "<SCRIPT LANGUAGE='JavaScript'>
-                self.parent.location.href='ajoutCommande.php?msg=insuffisante';
+                self.parent.location.href='Commande.php';
                 </SCRIPT> ";
                 die;}
     if ($etat==1){
         echo "<SCRIPT LANGUAGE='JavaScript'>
-                self.parent.location.href='ajoutCommande.php?msg=ajouter';
+                self.parent.location.href='Commande.php';
                 </SCRIPT> ";
         die;}
 

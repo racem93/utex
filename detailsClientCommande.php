@@ -89,7 +89,7 @@ $idCommande=$_GET["commande"];
                                 <?php
                                 include_once("config/MyPDO.class.php");
                                 $connect = new MyPDO();
-                                $req="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande' AND (`etat`=0 OR `etat`=1) AND `lignecommande`.`idProduit`=`produits`.`id` ";
+                                $req="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande' AND `etat`=1 AND `lignecommande`.`idProduit`=`produits`.`id` ";
                                 $oPDOStatement=$connect->query($req);
                                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
                                 $nbre=0;
@@ -98,9 +98,7 @@ $idCommande=$_GET["commande"];
                                     $refProduit = $row->refProduit;
                                     $qte = $row->qteCommande;
                                     $etat = $row->etat;
-
                                     ?>
-
                                     <tr>
                                         <td><?php echo $nbre; ?></td>
                                         <td><?php echo $refProduit; ?></td>

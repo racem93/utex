@@ -56,10 +56,6 @@
 <script type="text/javascript" src="js/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css?v=2.1.5" media="screen" />
 <script type="text/javascript">
-
-
-
-
     $(document).ready(function() {
         $("#iframe").fancybox({
             'width'          : '80%',
