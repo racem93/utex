@@ -9,6 +9,11 @@ function panier($idProduit,$qte,$etat ){
 
     $id_article=$idProduit;
     $quantite_article=$qte;
+    if (array_key_exists($idProduit, $_SESSION['qte'])) {
+        echo "<SCRIPT LANGUAGE='JavaScript'>
+                self.parent.location.href='ajoutCommande.php?msg=existe';
+                </SCRIPT> ";
+    }
     $_SESSION['qte'][$id_article]=$quantite_article;
     $_SESSION['etat'][$id_article]=$etat;
     $_SESSION['comptpanier']=count($_SESSION['qte']);
@@ -171,9 +176,22 @@ include("header.php");
                                     <div class="col-lg-4 col-md-4 col-sm-8 col-xs-7">
                                         <div class="form-group">
                                             <div class="form-line">
-                                                <input id="skills" name="refProduit"  class="form-control" placeholder="REF Produit" required>
+                                                <input id="skills" name="refProduit"  class="form-control" placeholder="REF Produit"  required>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <?php
+                                        if (isset($_GET["msg"])) {
+                                            $msg = $_GET["msg"];
+                                            if ($msg == "existe") {
+                                                echo '<div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            Le produit est déja dans votre panier
+                                        </div>';
+                                            }
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <br>
@@ -193,6 +211,7 @@ include("header.php");
                                             <div class="help-info">Min:1, Max:50 (mètre)</div>
                                         </div>
                                     </div>
+
                                 </div>
 
 
