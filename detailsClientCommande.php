@@ -82,7 +82,6 @@ $idCommande=$_GET["commande"];
                                     <th>#</th>
                                     <th>Ref</th>
                                     <th>Qte</th>
-                                    <th>Staut</th>
                                 </tr>
                                 <tbody>
                                 </thead>
@@ -103,8 +102,6 @@ $idCommande=$_GET["commande"];
                                         <td><?php echo $nbre; ?></td>
                                         <td><?php echo $refProduit; ?></td>
                                         <td><?php echo $qte; ?></td>
-                                        <td><?php echo $etat; ?></td>
-
                                     </tr>
                                     <?php
                                 }

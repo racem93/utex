@@ -32,10 +32,9 @@ include("header.php");
                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Ref Commande</th>
                                     <th>Date Commande</th>
-                                    <th>Action</th>
+                                    <th>Produit(s)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,17 +51,30 @@ include("header.php");
                                     $refCommade = $row->idCommande;
                                     $dateCommandeE = $row->dateCommande;
                                     $dateCommande = date("d-m-Y", strtotime($dateCommandeE));
-
+                                    $idCommande=$refCommade;
                                     ?>
 
                                     <tr>
-                                        <td><?php echo $nbre; ?></td>
-                                        <td>CMD<?php echo $refCommade; ?></td>
-                                        <td><?php echo $dateCommande; ?></td>
+
+                                        <td><a href="detailsClientCommande.php?commande=<?php echo $refCommade; ?>" id="iframe">CMD<?php echo $refCommade; ?></a></td>
+                                        <td><a href="detailsClientCommande.php?commande=<?php echo $refCommade; ?>" id="iframe"><?php echo $dateCommande; ?></a></td>
                                         <td>
-                                            <a href="detailsClientCommande.php?commande=<?php echo $refCommade; ?>" id="iframe">
-                                            <button type="button" class="btn btn-info waves-effect">détails</button>
-                                            </a>
+                                            <?php
+                                            $req2="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande' AND `etat`=1 AND `lignecommande`.`idProduit`=`produits`.`id` ";
+                                            $oPDOStatement2=$connect->query($req2);
+                                            $oPDOStatement2->setFetchMode(PDO::FETCH_OBJ);
+
+                                            while ($row2 = $oPDOStatement2->fetch()) {
+
+                                                $refProduit = $row2->refProduit;
+                                                echo '<a href="detailsClientCommande.php?commande=<?php echo $refCommade; ?>" id="iframe">';
+                                                echo $refProduit."<br>";
+                                                echo '</a>';
+
+
+                                    }
+                                            ?>
+
                                         </td>
                                     </tr>
                                     <?php
