@@ -100,7 +100,11 @@ $idCommande=$_GET["commande"];
                                     ?>
                                     <tr>
                                         <td><?php echo $nbre; ?></td>
-                                        <td><?php echo $refProduit; ?></td>
+
+                                            <?php
+
+                                            echo "<td>".$refProduit."</td>";
+                                            ?>
                                         <td><?php echo $qte; ?></td>
                                     </tr>
                                     <?php
