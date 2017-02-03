@@ -221,18 +221,18 @@ include("header.php");
                                 //test quand la quantité n'est pas disponible
                                 $arrivage=0;
                                 $lien=array();
-                                if ($etat == 1)  echo "Disponible";
+                                if ($etat == 1)  echo "<span class='label bg-green'>Disponible</span>";
                                 if ($etat == 0) {
                                     $arrivage=$data['arrivage'];
                                     if ($arrivage>=$qte){
-                                        echo "Bientôt disponible";
+                                        echo "<span class='label bg-orange'>Bientôt disponible</span>";
                                     }
                                     else {
                                         $lien=equivalence($refProduit,$qte);
-                                        echo "Pas disponible<br>";
+                                        echo "<span class='label bg-red'>Non disponible</span><br>";
                                         echo "Suggestion:<br>";
                                         foreach($lien as $suggestion){
-                                            echo "<a href='ajax/ajoutSuggestion.php?ref=".$suggestion."&qte=".$qte."' >".$suggestion."</a>";
+                                            echo "<a href='imageSuggestion.php?ref=".$suggestion."&qte=".$qte."' id='iframe' >".$suggestion."</a>";
                                             echo "<br>";
                                         }
                                     }

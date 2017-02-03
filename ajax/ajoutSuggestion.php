@@ -14,4 +14,8 @@ while ($row = $oPDOStatement->fetch())
 }
 $_SESSION['qte'][$idProduit]=$qte;
 $_SESSION['etat'][$idProduit]=1;
-header("location:../commande.php");
+$_SESSION['comptpanier']=count($_SESSION['qte']);
+echo "<SCRIPT LANGUAGE='JavaScript'>
+self.parent.location.href='../Commande.php';
+self.parent.$.fancybox.close();
+</SCRIPT> ";
