@@ -75,6 +75,16 @@ $idCommande=$_GET["commande"];
                             </h2>
 
                         </div>
+                        <?php
+                        include_once("config/MyPDO.class.php");
+                        $connect = new MyPDO();
+                        $req="SELECT * FROM `commande` WHERE  `commande`.`idCommande`=$idCommande  ";
+                        $oPDOStatement=$connect->query($req);
+                        $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
+                        while ($row = $oPDOStatement->fetch()) {
+                            $remarqueClient = $row->remarqueClient;
+                        }
+                        ?>
                         <div class="body table-responsive">
                             <table class="table">
                                 <thead>
@@ -86,8 +96,7 @@ $idCommande=$_GET["commande"];
                                 <tbody>
                                 </thead>
                                 <?php
-                                include_once("config/MyPDO.class.php");
-                                $connect = new MyPDO();
+
                                 $req="SELECT `lignecommande`.`qte` AS qteCommande,`refProduit`,`etat` FROM `lignecommande`,`produits` WHERE `idCommande`='$idCommande' AND `etat`=1 AND `lignecommande`.`idProduit`=`produits`.`id` ";
                                 $oPDOStatement=$connect->query($req);
                                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
@@ -117,6 +126,21 @@ $idCommande=$_GET["commande"];
                         </div>
 
                         <br>
+                        <div class="body">
+                            <h2 class="card-inside-title">Remarque</h2>
+                            <div class="row clearfix">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <textarea rows="3" class="form-control no-resize"  name="remarque" placeholder="Vos remarques..."  disabled ><?php echo $remarqueClient; ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
 
                     </div>
                 </div>

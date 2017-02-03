@@ -22,12 +22,53 @@ include("header.php");
             <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
+                        <form action="gestionCommande.php" method="post">
                         <div class="header">
-                            <h2>
-                                Gestion des commandes
-                            </h2>
+                            <div class="row clearfix">
+                                <div class="col-md-9 col-xs-8">
+                                <p>
+                                    <b>Filtrer par client</b>
+                                </p>
 
+                            <?php
+                            include_once("config/MyPDO.class.php");
+                            $connect = new MyPDO();
+                            $req="SELECT * FROM `utilisateur` WHERE `profile`=2 ";
+                            $oPDOStatement=$connect->query($req);
+                            $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
+                            ?>
+                            <select class="form-control show-tick" data-live-search="true" name="utilisateur" >
+                                <option value="-1" >Tous</option>
+                            <?php
+                            while ($row = $oPDOStatement->fetch()) {
+                                $login = $row->login;
+                                $idUtilisateur=$row->idUtilisateur;
+                                ?>
+                               <option value="<?php echo $idUtilisateur;?>"
+                               <?php
+                               if(isset($_POST['chercher'])) {
+                                   if ($idUtilisateur==$_POST['utilisateur']){
+                                       echo "selected";
+                                   }
+                               }
+                               ?>><?php echo $login; ?></option>
+                                <?php
+                            }
+                            ?>
+
+
+                                </select>
+                                    </div>
+                                <div class="col-md-3 col-xs-3">
+                                    <br>
+                                    <div class="align-center">
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" name="chercher"  >Chercher</button>
+                                </div>
+                                    </div>
+
+                            </div>
                         </div>
+                            </form>
                         <div class="body table-responsive">
                             <table class="table table-bordered table-striped table-hover js-basic-example2 dataTable">
                                 <thead>
@@ -41,9 +82,18 @@ include("header.php");
                                 </thead>
                                 <tbody>
                                 <?php
-                                include_once("config/MyPDO.class.php");
-                                $connect = new MyPDO();
-                                $req="SELECT * FROM `commande`,`utilisateur` WHERE `commande`.`utilisateur`=`utilisateur`.`idUtilisateur` ORDER BY `dateCommande` DESC ";
+                                if(isset($_POST['chercher']))
+                                {
+                                $utilisaeur = $_POST['utilisateur'];
+                                    if ($utilisaeur==-1){
+                                        $req = "SELECT * FROM `commande`,`utilisateur` WHERE `commande`.`utilisateur`=`utilisateur`.`idUtilisateur` ORDER BY `dateCommande` DESC ";
+                                    }
+                                    else
+                                $req="SELECT * FROM `commande`,`utilisateur` WHERE `commande`.`utilisateur`=`utilisateur`.`idUtilisateur` AND `utilisateur`.`idUtilisateur`='$utilisaeur' ORDER BY `dateCommande` DESC ";
+                                }
+                                else {
+                                    $req = "SELECT * FROM `commande`,`utilisateur` WHERE `commande`.`utilisateur`=`utilisateur`.`idUtilisateur` ORDER BY `dateCommande` DESC ";
+                                }
                                 $oPDOStatement=$connect->query($req);
                                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
                                 while ($row = $oPDOStatement->fetch()) {

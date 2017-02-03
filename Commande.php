@@ -165,9 +165,10 @@ include("header.php");
                         //insertion de commande
                             if (isset($_POST["submit"])) {
                                 $utilisateur=$_SESSION["id"];
+                                extract($_POST);
                                 $datecommande = date("Y-m-d");
-                                $req1 = 'INSERT INTO `commande`( `utilisateur`,`dateCommande`)
-                                    VALUES (' . '"' . $utilisateur . '"' . ',' . '"' . $datecommande . '"' . ')';
+                                $req1 = 'INSERT INTO `commande`( `utilisateur`,`dateCommande`,`remarqueClient`)
+                                    VALUES (' . '"' . $utilisateur . '"' . ',' . '"' . $datecommande . '"' . ',' . '"' . $remarque . '"' . ')';
                                 $oPDOStatement = $connect->query($req1); // Le résultat est un objet de la classe PDOStatement
                                 $req2 = "SELECT * FROM commande WHERE idCommande=(SELECT MAX(idCommande) as 'DERNIER_ID' from commande)";
                                 $oPDOStatement3=$connect->query($req2); // Le résultat est un objet de la classe PDOStatement
@@ -270,6 +271,20 @@ include("header.php");
 
                 </div>
                 <form method="post" action="Commande.php">
+                    <div class="body">
+                        <h2 class="card-inside-title">Remarque</h2>
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <textarea rows="3" class="form-control no-resize" placeholder="Veuillez saisir ce que vous voulez ..." name="remarque"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                     <div class="row">
                         <div class="col-xs-8 p-t-5">
                             <h5> <a href="ajoutCommande.php"><<< Continuer mes achats</a></h5>
