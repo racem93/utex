@@ -234,6 +234,7 @@ include("header.php");
                                         foreach($lien as $suggestion){
                                             echo "<a href='imageSuggestion.php?ref=".$suggestion."&qte=".$qte."' id='iframe' >".$suggestion."</a>";
                                             echo "<br>";
+
                                         }
                                     }
 
