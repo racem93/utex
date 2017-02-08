@@ -135,6 +135,21 @@ include("header.php");
                 ?>
 
                 <h2>Commande</h2>
+				
+				<?php 
+										    $connect = new MyPDO();
+
+						$reqsite="SELECT `etat` FROM `site` WHERE `idSite`='1' ";
+    $oPDOStatement=$connect->query($reqsite);
+    $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
+    while ($row = $oPDOStatement->fetch())
+    {
+        $etatsite=$row->etat;
+    }
+	
+	 if ($etatsite == 1) {
+				?>
+				
                 <div class="navbar-right">
 
 			  
@@ -152,6 +167,8 @@ include("header.php");
 						<span class="buybtn-image"><span></span></span>
 					</a>		
                     </div>
+					
+					<?php } ?>
             </div>
             <!-- Horizontal Layout -->
             <div class="row clearfix">
@@ -159,11 +176,22 @@ include("header.php");
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Nouveau commande
+                                Nouvelle commande
                             </h2>
 
                         </div>
                         <div class="body">
+						
+						<?php 
+
+    if ($etatsite == 0) { echo "<div class='alert bg-pink'>
+Désolé,<br> Ce service est désactivé en ce moment, Vous ne pouvez pas passer des commandes.. <br>Merci de contacter notre service commercial.
+</div>";
+                    }elseif ($etatsite == 1){
+					?>
+						 
+						
+						
                             <form class="form-horizontal" id="form_advanced_validation" method="post" action="ajoutCommande.php" >
 
                                 <div class="row clearfix">
@@ -222,6 +250,8 @@ include("header.php");
                                 </div>
 
                             </form>
+							
+							<?php } ?>
                         </div>
                     </div>
                 </div>
