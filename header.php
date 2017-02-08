@@ -185,7 +185,7 @@
 				if (isset($_SESSION["profile"]) && $_SESSION["profile"]==1){
 				?>
 			   <li>
-                    <a href="#">
+                    <a href="home.php">
                         <i class="material-icons">home</i>
                         <span>Home</span>
                     </a>

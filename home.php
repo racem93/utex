@@ -15,8 +15,18 @@ if (!isset ($_SESSION["login"])){
 include("header.php");
 include_once("config/MyPDO.class.php");
 $connect = new MyPDO();
-include_once("config/MyPDO1.class.php");
-$connect1 = new MyPDO1();
+
+$reqetat = "SELECT `etat` FROM `site` WHERE `idSite`=1";
+$oPDOStatements = $connect->query($reqetat); // Le r&eacute;sultat est un objet de la classe PDOStatement
+  $oPDOStatements->setFetchMode(PDO::FETCH_OBJ);
+$etatsite=2;               
+			   while ($row = $oPDOStatements->fetch()) {
+                      $etatsite=$row->etat;
+
+                                }
+
+//include_once("config/MyPDO1.class.php");
+//$connect1 = new MyPDO1();
 /* Pour tester la connexion
 $ipserver="41.228.165.240";
 $portserver="8933";
@@ -34,6 +44,7 @@ $condis = mysql_connect("$ipserver:$portserver","utex","Utex*2017*"); // connexi
 $a159=mysql_query("SELECT * FROM datades.stock_des",$condis) or die(mysql_error()); // Lecture des données
 */
 
+/*
 $req="TRUNCATE TABLE `produits`";
 $oPDOStatement5=$connect->query($req);
 // on fait notre requête
@@ -53,6 +64,7 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
                             VALUES ("."'".$refProduit."'".","."'".$stock."'".","."'".$arrivage."'".")";
     $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
 }
+*/
 ?>
 
 
@@ -97,7 +109,7 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
                 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-						
+<div id="MyDiv"></div>
                             <h2>
                                Etat Application
                             </h2>
@@ -105,11 +117,18 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
 
                                                            <div class="pull-right">
 
-							    <div class="switch panel-switch-btn">
+							    
+								<?php if ($etatsite==0){ ?>
+								<div class="switch panel-switch-btn">
                                     <span class="m-r-10 font-12"></span>
-                                    <label>OFF<input type="checkbox" id="realtime" checked><span class="lever switch-col-cyan"></span>ON</label>
+                                    <label>OFF<input type="checkbox" id="etat" ><span class="lever switch-col-cyan"></span>ON</label>
                                 </div>
-							   
+							   <?php }elseif ($etatsite==1){ ?>
+							   <div class="switch panel-switch-btn">
+                                    <span class="m-r-10 font-12"></span>
+                                    <label>OFF<input type="checkbox" id="etat" checked ><span class="lever switch-col-cyan"></span>ON</label>
+                                </div>
+							   <?php } ?>
                                 <br>
 
                                                                </div>
@@ -161,7 +180,7 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
                             <i class="material-icons">shopping_cart</i>
                         </div>
                         <div class="content">
-                            <div class="text">Nouveaux Commandes</div>
+                            <div class="text">Nouvelles Commandes</div>
                             <div class="number count-to" data-from="0" data-to="125" data-speed="1000" data-fresh-interval="20"><?php echo $commandes; ?></div>
                         </div>
                     </div>
@@ -193,7 +212,33 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
             <!-- #END# Horizontal Layout -->
             </div>
         </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+$("#etat").change(function() {
+    if(this.checked) {
+        //Do stuff
+alert ('Application ON');
+$.ajax({
+  url: 'siteon.php',
+  success: function(data) {
+    $('#MyDiv').html(data);
+  }
+});
+
+    }else{
+	alert ('Application OFF');
+	
+	$.ajax({
+  url: 'siteoff.php',
+  success: function(data) {
+    $('#MyDiv').html(data);
+  }
+});
+
+	}
+});
+</script>
 
 
-<?php
-include("footer.php");
+<?php include("footer.php"); ?>
