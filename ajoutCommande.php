@@ -185,7 +185,8 @@ include("header.php");
 						<?php 
 
     if ($etatsite == 0) { echo "<div class='alert bg-pink'>
-Désolé,<br> Ce service est désactivé en ce moment, Vous ne pouvez pas passer des commandes.. <br>Merci de contacter notre service commercial.
+Désolé,<br> Ce service est désactivé en ce moment, Vous ne pouvez pas passer des commandes.. <br>Merci de contacter notre service commercial.<br>
+Tél: 74 832 283 / 28 832 832
 </div>";
                     }elseif ($etatsite == 1){
 					?>
