@@ -1,4 +1,22 @@
+<?php
+        $iddd=$_SESSION["id"];
 
+  include_once("config/MyPDO.class.php");
+    $connect = new MyPDO();
+    $req="SELECT * FROM `utilisateur` WHERE `idUtilisateur`='$iddd' ";
+    $oPDOStatement=$connect->query($req);
+    $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
+  //  $a=0;
+    while ($row = $oPDOStatement->fetch())
+    {
+        //$a++;
+		
+   
+        $photo=$row->photo;
+     
+    }
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -38,6 +56,8 @@
     <!-- Sweet Alert Css -->
     <link href="plugins/sweetalert.css" rel="stylesheet" />
 
+	 
+	
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
     <link href="css/panier.css" rel="stylesheet">
@@ -74,7 +94,7 @@
 </head>
 
 <body class="theme-red">
-<!-- Page Loader -->
+<!-- Page Loader ->
 <div class="page-loader-wrapper">
     <div class="loader">
         <div class="preloader">
@@ -129,14 +149,26 @@
         <!-- User Info -->
         <div class="user-info">
             <div class="image">
-                <img src="images/user.png" width="48" height="48" alt="User" />
+                <img src="images/upload/<?php 
+				if ($photo!=null){
+				echo $photo ;
+				}else{ echo "user.png";}
+				
+				?>" width="48" height="48" alt="User" />
             </div>
             <div class="info-container">
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['login']; ?></div>
                 <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="profile.php"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="profile.php?id=<?php 
+							if (isset($_SESSION["id"])){
+							echo $_SESSION["id"]; }
+							else {
+							echo "0";
+							}
+							
+							?>"><i class="material-icons">person</i>Profile</a></li>
                             <li role="seperator" class="divider"></li>
                         
                             <li><a href="deconnexion.php"><i class="material-icons">input</i>Sign Out</a></li>
@@ -177,6 +209,8 @@
                         <span>Historiques des commandes</span>
                     </a>
                 </li>
+				
+				
 				 <?php 
 					}
 				?>
@@ -186,9 +220,28 @@
 				<li>
                     <a href="gestionCommande.php">
                         <i class="material-icons">note_add</i>
-                        <span>Gestion commande</span>
+                        <span>Gestion commandes</span>
                     </a>
                 </li>
+				
+				
+				
+				<li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Gestion clients</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="ajoutclient.php" class="">
+                                    <span>Ajout client</span>
+                                </a>
+                                <a href="gestionclient.php" class="">
+                                    <span>Consulter les clients</span>
+                                </a>
+                            </li>
+						</ul>
+				
 				 <?php 
 				  }
 				?>

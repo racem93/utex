@@ -12,47 +12,10 @@ if (!isset ($_SESSION["login"])){
 ?>
 <?php
 
+
+
+
 include("header.php");
-include_once("config/MyPDO.class.php");
-$connect = new MyPDO();
-include_once("config/MyPDO1.class.php");
-$connect1 = new MyPDO1();
-/* Pour tester la connexion
-$ipserver="41.228.165.240";
-$portserver="8933";
-$port="8989";
-$handle = @fopen("http://$ipserver:$port/AMINE/", "r");
-if (!$handle) {
-    die("Impossible de se connecter au serveur");
-}
-// Fin Test
-
-
-$condis = mysql_connect("$ipserver:$portserver","utex","Utex*2017*"); // connexion à la base du client
-
-
-$a159=mysql_query("SELECT * FROM datades.stock_des",$condis) or die(mysql_error()); // Lecture des données
-*/
-
-$req="TRUNCATE TABLE `produits`";
-$oPDOStatement5=$connect->query($req);
-// on fait notre requête
-$req = "SELECT * FROM stock_des";
-$oPDOStatements = $connect1->query($req); // Le r&eacute;sultat est un objet de la classe PDOStatement
-$oPDOStatements->setFetchMode(PDO::FETCH_ASSOC);;//retourne true on success, false otherwise.
-//insertion de commande
-while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu de résultat PDO
-{
-
-
-    @$arrivage=$b159[arrivage];
-    @$stock=$b159[stock];
-    @$refProduit=$b159[NOM_PRODUIT];
-     // Insertion des données dans la base local
-    $req = "INSERT INTO produits ( refProduit,qte,arrivage)
-                            VALUES ("."'".$refProduit."'".","."'".$stock."'".","."'".$arrivage."'".")";
-    $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
-}
 ?>
 
 
@@ -126,6 +89,8 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
                         </div>
                     </div>
                 <?php
+                include_once("config/MyPDO.class.php");
+                $connect = new MyPDO();
                 $req="SELECT `idCommande` AS commandes FROM `commande` WHERE `traite`=0 ";
                 $oPDOStatement=$connect->query($req);
                 $oPDOStatement->setFetchMode(PDO::FETCH_OBJ);
