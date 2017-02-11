@@ -94,7 +94,7 @@
 </head>
 
 <body class="theme-red">
-<!-- Page Loader ->
+<!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
         <div class="preloader">

@@ -39,7 +39,7 @@ if (!isset ($_SESSION["login"])){
    */
 	
 	 $target_dir = "images/upload/";
- $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+ @$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
  $uploadOk = 1;
  $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
