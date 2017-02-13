@@ -21,9 +21,11 @@ while ($b159 = $oPDOStatements->fetch())//Récupère la ligne suivante d'un jeu 
     @$arrivage=$b159[arrivage];
     @$stock=$b159[stock];
     @$refProduit=$b159[NOM_PRODUIT];
+    @$id=$b159[id];
+    @$imageProduit=$b159[id].".jpg";
     // Insertion des données dans la base local
-    $req = "INSERT INTO produits ( refProduit,qte,arrivage)
-                            VALUES ("."'".$refProduit."'".","."'".$stock."'".","."'".$arrivage."'".")";
+    $req = "INSERT INTO produits ( id,refProduit,qte,arrivage,imageProduit)
+                            VALUES ("."'".$id."'".","."'".$refProduit."'".","."'".$stock."'".","."'".$arrivage."'".","."'".$imageProduit."'".")";
     $oPDOStatement5=$connect->query($req); // Le résultat est un objet de la classe PDOStatement
 }
 

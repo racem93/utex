@@ -221,8 +221,12 @@ $("#etat").change(function() {
 alert ('Application ON');
 $.ajax({
   url: 'siteon.php',
+    beforeSend: function(){
+        $('#load').show()
+    },
   success: function(data) {
     $('#MyDiv').html(data);
+      $('#load').hide();
   }
 });
 
@@ -237,6 +241,9 @@ $.ajax({
 });
 
 	}
+});
+$(document).ajaxStart(function(){
+    $("#wait").css("display", "block");
 });
 </script>
 
